@@ -56,7 +56,7 @@ const tempWatchedData = [
 
 const KEY = "694a2c05";
 export default function App() {
-  const [query, setQuery] = useState("inception");
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isloading, setIsLoading] = useState(false);
@@ -79,12 +79,14 @@ export default function App() {
   // console.log("COMPONENT RE-RENDERED");
   useEffect(
     function () {
+      const controller = new AbortController();
       async function fetchMovies() {
         try {
           setIsLoading(true);
           setError("");
           const res = await fetch(
-            `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+            `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
+            { signal: controller.signal }
           );
           if (!res.ok) {
             throw new Error("Something went wrong in fetching movies");
@@ -95,8 +97,11 @@ export default function App() {
           setMovies(data.Search);
           setIsLoading(false);
         } catch (err) {
-          // console.log(err.message);
-          setError(err.message);
+          console.log(err.name);
+          if (err.name !== "AbortError") {
+            setError(err.message);
+            setError("");
+          }
         } finally {
           setIsLoading(false);
         }
@@ -107,6 +112,9 @@ export default function App() {
         return;
       }
       fetchMovies();
+      return function () {
+        controller.abort();
+      };
     },
     [query]
   );

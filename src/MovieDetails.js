@@ -28,6 +28,23 @@ export default function MovieDetails({
     Director,
     Genre,
   } = movie;
+
+  useEffect(
+    function () {
+      function callBack(e) {
+        if (e.code === "Escape") {
+          handleCloseMovie();
+          console.log("ESCAPE ");
+        }
+      }
+
+      document.addEventListener("keydown", callBack);
+      return function () {
+        document.removeEventListener("keydown", callBack);
+      };
+    },
+    [handleCloseMovie]
+  );
   useEffect(
     function () {
       async function getMovieDetails() {
@@ -49,6 +66,9 @@ export default function MovieDetails({
     function () {
       if (!Title) return;
       document.title = `Movie : ${Title}`;
+      return function () {
+        document.title = "Use Popcorn";
+      };
     },
     [Title]
   );
