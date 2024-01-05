@@ -4,7 +4,10 @@ export default function Box({ children }) {
 
   return (
     <>
-      <div className="box">
+      <div
+        className="box"
+        style={{ overflowY: "auto", overflowX: "hidden", fontSize: "2rem" }}
+      >
         <button
           className="btn-toggle"
           onClick={() => setIsOpen((open) => !open)}

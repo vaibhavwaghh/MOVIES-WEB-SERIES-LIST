@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import StarRating from "./StarRating";
 import { Loader } from "./App";
+import { useKey } from "./useKey";
 const KEY = "694a2c05";
 export default function MovieDetails({
   selectedId,
@@ -28,23 +29,30 @@ export default function MovieDetails({
     Director,
     Genre,
   } = movie;
-
+  const countRef = useRef(0);
   useEffect(
     function () {
-      function callBack(e) {
-        if (e.code === "Escape") {
-          handleCloseMovie();
-          console.log("ESCAPE ");
-        }
-      }
-
-      document.addEventListener("keydown", callBack);
-      return function () {
-        document.removeEventListener("keydown", callBack);
-      };
+      if (userRating) countRef.current = countRef.current + 1;
     },
-    [handleCloseMovie]
+    [userRating]
   );
+  useKey("Escape", handleCloseMovie);
+  // useEffect(
+  //   function () {
+  //     function callBack(e) {
+  //       if (e.code === "Escape") {
+  //         handleCloseMovie();
+  //         console.log("ESCAPE ");
+  //       }
+  //     }
+
+  //     document.addEventListener("keydown", callBack);
+  //     return function () {
+  //       document.removeEventListener("keydown", callBack);
+  //     };
+  //   },
+  //   [handleCloseMovie]
+  // );
   useEffect(
     function () {
       async function getMovieDetails() {
@@ -81,6 +89,7 @@ export default function MovieDetails({
       imdbRating: Number(imdbRating),
       Runtime: Runtime.split(" ")[0],
       userRating,
+      countRatingDecision: countRef.current,
     };
     onAddWatched(newWatchedMovie);
     handleCloseMovie();
@@ -91,14 +100,11 @@ export default function MovieDetails({
         <Loader />
       ) : (
         <>
-          <button
-            onClick={handleCloseMovie}
-            style={{ fontSize: "20px", cursor: "pointer" }}
-          >
-            &larr;
-          </button>
-          <header>
-            <img src={Poster} alt={`Poster of ${Title}`} />
+          <header style={{ position: "relative" }}>
+            <img src={Poster} alt={`Poster of ${Title}`} className="mov-img" />
+            <button class="back-btn" onClick={handleCloseMovie}>
+              &#8592;
+            </button>
             <div className="details-overview">
               <h2>{Title}</h2>
               <p>
