@@ -50,8 +50,8 @@ body {
 }
 
 .box {
-  width: 42rem;
-  max-width: 42rem;
+  width: 47rem;
+  max-width: 47rem;
   background-color: var(--color-background-500);
   border-radius: 0.9rem;
 
@@ -73,10 +73,10 @@ body {
 .back-btn:hover {
   background-color: #e0e0e0;
 }
-.mov-img {
+/* .mov-img {
   width: 40rem;
   height: 40rem;
-}
+} */
 .loader {
   text-align: center;
   text-transform: uppercase;
