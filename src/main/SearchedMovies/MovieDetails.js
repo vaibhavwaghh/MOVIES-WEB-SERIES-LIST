@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import StarRating from "./StarRating";
-import { Loader } from "./App";
-import { useKey } from "./useKey";
+import Loader from "../../Helpers/Loader";
+import { useKey } from "../../hooks/useKey";
 const KEY = "694a2c05";
 export default function MovieDetails({
   selectedId,
@@ -81,20 +81,23 @@ export default function MovieDetails({
     [Title]
   );
   function handleAdd() {
-    const newWatchedMovie = {
-      imdbID: selectedId,
-      Title,
-      Year,
-      Poster,
-      imdbRating: Number(imdbRating),
-      Runtime: Runtime.split(" ")[0],
-      timestamp: Date.now(),
-      userRating,
-      countRatingDecision: countRef.current,
-    };
-    console.log("THIS IS NEW WATCHED MOVIE", newWatchedMovie);
-    onAddWatched(newWatchedMovie);
-    handleCloseMovie();
+    if (userRating === "") alert("Please Rate this movie");
+    else {
+      const newWatchedMovie = {
+        imdbID: selectedId,
+        Title,
+        Year,
+        Poster,
+        imdbRating: Number(imdbRating),
+        Runtime: Runtime.split(" ")[0],
+        timestamp: Date.now(),
+        userRating,
+        countRatingDecision: countRef.current,
+      };
+      console.log("THIS IS NEW WATCHED MOVIE", newWatchedMovie);
+      onAddWatched(newWatchedMovie);
+      handleCloseMovie();
+    }
   }
   return (
     <div className="selected">

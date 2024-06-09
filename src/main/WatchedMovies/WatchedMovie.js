@@ -1,4 +1,4 @@
-export default function WatchedMovie({ movie, onDeleteWatched }) {
+function WatchedMovie({ movie, onDeleteWatched }) {
   console.log(movie);
   return (
     <>
@@ -33,3 +33,5 @@ export default function WatchedMovie({ movie, onDeleteWatched }) {
     </>
   );
 }
+
+export default WatchedMovie;

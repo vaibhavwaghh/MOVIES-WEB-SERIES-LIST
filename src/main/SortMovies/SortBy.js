@@ -1,5 +1,5 @@
 import { useState } from "react";
-import WatchedMoviesList from "./WatchedMoviesList";
+import WatchedMoviesList from "../WatchedMovies/WatchedMoviesList";
 
 function SortBy({ watched, onDeleteWatched }) {
   return (
