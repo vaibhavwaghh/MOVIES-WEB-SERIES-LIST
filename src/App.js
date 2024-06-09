@@ -10,7 +10,8 @@ import WatchedMoviesList from "./WatchedMoviesList";
 import { useMovies } from "./useMovies";
 import { useLocalStorageState } from "./useLocalStorageState";
 import { useKey } from "./useKey";
-
+import logo from "./popcorn.png";
+import SortBy from "./SortBy";
 // const tempMovieData = [
 //   {
 //     imdbID: "tt1375666",
@@ -118,10 +119,8 @@ export default function App() {
           ) : (
             <>
               <WatchedSummary watched={watched} />
-              <WatchedMoviesList
-                watched={watched}
-                onDeleteWatched={handleDeleteWatched}
-              />
+              <br />
+              <SortBy watched={watched} onDeleteWatched={handleDeleteWatched} />
             </>
           )}
         </Box>
@@ -146,8 +145,8 @@ export function Logo() {
   return (
     <>
       <div className="logo">
-        <span role="img">🍿</span>
-        <h1>usePopcorn</h1>
+        <img style={{ width: "3.5rem" }} src={logo} alt="" />
+        <h1>Popcorn Movies</h1>
       </div>
     </>
   );

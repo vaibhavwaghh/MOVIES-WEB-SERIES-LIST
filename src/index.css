@@ -50,8 +50,8 @@ body {
 }
 
 .box {
-  width: 47rem;
-  max-width: 47rem;
+  max-width: 55rem;
+  width: 60rem;
   background-color: var(--color-background-500);
   border-radius: 0.9rem;
 
@@ -400,3 +400,33 @@ EMPTY STAR
 </svg>
 
 */
+/**TAB CONTENT **/
+.toggle {
+  position: absolute;
+  right: 0;
+  background: none;
+  font-size: 30px;
+  padding: 4px;
+}
+
+.tabs {
+  margin-bottom: 8px;
+}
+
+.tab {
+  border-radius: 12px;
+  background-color: #edf2ff;
+  padding: 12px 24px;
+  margin-right: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #364fc7;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.tab.active,
+.tab:hover {
+  background-color: #364fc7;
+  color: #fff;
+}

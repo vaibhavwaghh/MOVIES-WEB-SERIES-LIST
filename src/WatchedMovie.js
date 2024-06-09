@@ -18,6 +18,10 @@ export default function WatchedMovie({ movie, onDeleteWatched }) {
             <span>⏳</span>
             <span>{movie.Runtime} min</span>
           </p>
+          <p>
+            <span>🕐</span>
+            <span>{movie.Year}</span>
+          </p>
           <button
             className="btn-delete"
             onClick={() => onDeleteWatched(movie.imdbID)}

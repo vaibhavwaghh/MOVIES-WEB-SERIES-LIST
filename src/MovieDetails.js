@@ -88,9 +88,11 @@ export default function MovieDetails({
       Poster,
       imdbRating: Number(imdbRating),
       Runtime: Runtime.split(" ")[0],
+      timestamp: Date.now(),
       userRating,
       countRatingDecision: countRef.current,
     };
+    console.log("THIS IS NEW WATCHED MOVIE", newWatchedMovie);
     onAddWatched(newWatchedMovie);
     handleCloseMovie();
   }
