@@ -19,6 +19,7 @@ const starContainerStyle = {
   display: "flex",
   gap: "4px",
 };
+
 function StarRating({
   maxRating = 5,
   color = "#fcc419",
@@ -26,7 +27,7 @@ function StarRating({
   className = "",
   messages = [],
   defaultRating = 0,
-  setCustomerRating,
+  setUserRating,
 }) {
   const textStyle = {
     lineHieght: "1",
@@ -38,7 +39,7 @@ function StarRating({
   const [tempRating, setTempRating] = useState(0);
   function handleRating(val) {
     setRating(val);
-    setCustomerRating(val);
+    setUserRating(val);
   }
   return (
     <>
