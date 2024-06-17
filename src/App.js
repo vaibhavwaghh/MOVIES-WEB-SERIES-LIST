@@ -6,19 +6,13 @@ import { useLocalStorageState } from "./hooks/useLocalStorageState";
 import { useGetAllMovies } from "./hooks/useGetAllMovies";
 
 export default function App() {
+  /**USING CUSTOMIZED HOOK(HOOK CREATED BY ME) */
+  const [watched, setWatched] = useLocalStorageState([], "watched");
+
   const [query, setQuery] = useState("");
   const { movies, isloading, error } = useGetAllMovies(query);
 
   const [selectedId, setSelectedId] = useState("");
-  /**METHOD 1 : USESTATE */
-  //  const [watched, setWatched] = useState("")
-  /**METHOD 2 : USESTATE HOOK */
-  // const [watched, setWatched] = useState(function () {
-  //   const storedValue = localStorage.getItem("watched");
-  //   return JSON.parse(storedValue);
-  // });
-  /**METHOD 3 : USING CUSTOMIZED HOOK(HOOK CREATED BY ME) */
-  const [watched, setWatched] = useLocalStorageState([], "watched");
 
   function handleSelectedMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id));
@@ -26,9 +20,9 @@ export default function App() {
   function handleCloseMovie() {
     setSelectedId(null);
   }
+
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
-    // localStorage.setItem("watched", JSON.stringify([...watched, movie]));
   }
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
